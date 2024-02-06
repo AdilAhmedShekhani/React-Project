@@ -1,10 +1,12 @@
 import "./App.css";
-import Navbar from "./components/Navbar";
+import ContactHeader from "./components/ContactHeader/ContactHeader";
+import Navbar from "./components/Navbar/Navbar";
 
 function App() {
   return (
     <>
       <Navbar />
+      <ContactHeader />
     </>
   );
 }
