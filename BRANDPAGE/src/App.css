@@ -4,6 +4,9 @@
   --red: #d01c28;
   --gray: #2e2e2e;
 }
+* {
+  margin: 0;
+}
 body {
   font-family: "Poppins", sans-serif;
 }
