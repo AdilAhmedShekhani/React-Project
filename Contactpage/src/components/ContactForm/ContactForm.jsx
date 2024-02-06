@@ -5,6 +5,15 @@ import { FaPhoneAlt } from "react-icons/fa";
 import { HiMail } from "react-icons/hi";
 
 const ContactForm = () => {
+  let name;
+  let email;
+  let text;
+  const onSubmit = (event) => {
+    event.preventDefault();
+    name = event.target[0].value;
+    email = event.target[1].value;
+    text = event.target[2].value;
+  };
   return (
     <section className={styles.container}>
       <div className={styles.contact_form}>
@@ -21,7 +30,7 @@ const ContactForm = () => {
           icon={<HiMail fontSize="24px" />}
         />
 
-        <form>
+        <form onSubmit={onSubmit}>
           <div className={styles.form_control}>
             <label htmlFor="name">Name</label>
             <input type="text" name="name" />
