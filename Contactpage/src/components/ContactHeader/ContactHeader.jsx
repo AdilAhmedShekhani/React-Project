@@ -2,7 +2,7 @@ import styles from "./ContactHeader.module.css";
 
 const ContactHeader = () => {
   return (
-    <div className={`container ${styles.contact_section}`}>
+    <div className={`${styles.contact_section}`}>
       <h1>CONTACT US</h1>
       <p>
         The Usman Memorial Hospital relies upon the trust and support of its
