@@ -9,6 +9,7 @@ import { IoMdTrash } from "react-icons/io";
 import { RiEditCircleLine } from "react-icons/ri";
 import ContactCard from "./components/ContactCard";
 import Modal from "./components/Modal";
+import AddAndUpdateContact from "./components/AddAndUpdateContact";
 export default function App() {
   const [contacts, setContacts] = useState([]);
 
@@ -42,27 +43,28 @@ export default function App() {
 
   return (
     <>
-    <div className="mx-auto max-w-[370px] px-4">
-      <Navbar />
-      <div className="flex gap-2">
-        <div className=" relative flex items-center flex-grow">
-          <FiSearch className=" ml-1 absolute text-3xl text-white" />
-          <input
-            type="text"
-            className="pl-9 h-10 flex-grow rounded-md border border-white bg-transparent text-white"
+      <div className="mx-auto max-w-[370px] px-4">
+        <Navbar />
+        <div className="flex gap-2">
+          <div className=" relative flex items-center flex-grow">
+            <FiSearch className=" ml-1 absolute text-3xl text-white" />
+            <input
+              type="text"
+              className="pl-9 h-10 flex-grow rounded-md border border-white bg-transparent text-white"
+            />
+          </div>
+          <AiFillPlusCircle
+            onClick={onOpen}
+            className=" cursor-pointer text-5xl text-white"
           />
         </div>
-        <AiFillPlusCircle onClick={onOpen} className=" cursor-pointer text-5xl text-white" />
+        <div className="mt-4 flex flex-col gap-3">
+          {contacts.map((contact) => (
+            <ContactCard key={contact.id} contact={contact} />
+          ))}
+        </div>
       </div>
-      <div className="mt-4 flex flex-col gap-3">
-        {contacts.map((contact) => (
-          <ContactCard key={contact.id} contact={contact} />
-        ))}
-      </div>
-    </div>
-    <Modal isOpen={isOpen} onClose={onClose}>
-      Hi
-    </Modal >
+      <AddAndUpdateContact onClose={onClose} isOpen={isOpen} />
     </>
   );
 }
