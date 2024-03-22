@@ -26,8 +26,6 @@ export default function App() {
               ...doc.data(),
             };
           });
-          setContacts(contactLists);
-          return contactLists;
         });
       } catch (error) {
         console.log(error);
@@ -35,6 +33,28 @@ export default function App() {
     };
     getContacts();
   }, []);
+
+  const filterContacts = (e) => {
+    const value = e.target.value;
+
+    const contactsRef = collection(db, "contacts");
+
+    onSnapshot(contactsRef, (snapshot) => {
+      const contactLists = snapshot.docs.map((doc) => {
+        return {
+          id: doc.id,
+          ...doc.data(),
+        };
+      });
+
+      const filteredContacts = contactLists.filter((contact) =>
+        contact.name.toLowerCase().includes(value.toLowerCase())
+      );
+
+      setContacts(filteredContacts);
+      return filteredContacts;
+    });
+  };
 
   return (
     <>
@@ -44,6 +64,7 @@ export default function App() {
           <div className=" relative flex items-center flex-grow">
             <FiSearch className=" ml-1 absolute text-3xl text-white" />
             <input
+              onChange={filterContacts}
               type="text"
               className="pl-9 h-10 flex-grow rounded-md border border-white bg-transparent text-white"
             />
@@ -60,6 +81,7 @@ export default function App() {
         </div>
       </div>
       <AddAndUpdateContact onClose={onClose} isOpen={isOpen} />
+      <ToastContainer position="bottom-center" />
     </>
   );
 }
